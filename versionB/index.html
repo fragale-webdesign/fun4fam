@@ -1870,6 +1870,32 @@ width="{{ Math.round(picture.width * (picture.displayScale || screen.displayScal
 </div><!-- inner2 -->
 </div> <!-- inner -->
 </script> 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-91167101-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- Tweak for Google Analytics to catch SPA navigation -->
+<script>
+var currentPage = window.location.href;
+window.onload = function() {
+	setInterval(function() {
+	    if (currentPage !== window.location.href) {
+	        currentPage = window.location.href;
+	        var newPage = window.location.pathname + window.location.hash
+			ga('set', 'page', newPage);
+			ga('send', 'pageview');
+			console.log(newPage);        
+	    }
+	}, 100);
+};
+</script>
+<!-- End of tweak for Google Analytics to catch SPA navigation -->
 
 
 </body>
