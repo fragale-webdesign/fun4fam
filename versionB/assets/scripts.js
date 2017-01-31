@@ -5655,7 +5655,7 @@ scope.openModalWindow( "error", "The file, \"" + fileExcludedBasedOnName + ",\" 
 if (triggerExtractionWarning) {
 $timeout(function() {
 scope.openModalWindow( 'extractionDeprecated' );
-})
+});
 }
 return filesToAdd;
 }
@@ -5932,12 +5932,16 @@ tempFiles = requestFiles = null;
 _screenType = "";
 }
 function _removeInvalidFiles(up, files) {
-_skipQueueChangedEvent = true;
+var filesToRemove = [];
 up.files.forEach(function(file) {
 var validFile = _.find(files, { id: file.id });
 if (!validFile) {
-up.removeFile(file); // this will trigger "QueueChanged" event
+filesToRemove.push(file);
 };
+});
+_skipQueueChangedEvent = true;
+filesToRemove.forEach(function(file) {
+up.removeFile(file); // this will trigger "QueueChanged" event
 });
 _skipQueueChangedEvent = false;
 }
